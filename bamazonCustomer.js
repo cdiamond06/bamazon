@@ -32,7 +32,9 @@ var start = function() {
         var columns = columnify(results, {
             columnSplitter: '|'
         });
+        console.log("-------------------------------------------------------");
         console.log(columns);
+        console.log("-------------------------------------------------------");
          inquirer.prompt([
          {
 
@@ -45,7 +47,6 @@ var start = function() {
                 }
                 return false;
             }
-
         },
 
         {
@@ -118,7 +119,10 @@ function getDepartment(name, units){
         var columns = columnify(results, {
             columnSplitter: '|'
         });
+        console.log("----------------------------------------------------------------");
         console.log(columns);
+        console.log("----------------------------------------------------------------");
+        start();
     });
 
 

@@ -18,7 +18,17 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    start();
+    var query = "SELECT * FROM products";
+    connection.query(query, function(err, results) {
+        if (err) throw err;
+        var columns = columnify(results, {
+            columnSplitter: '|'
+        });
+        console.log("----------------------------------------------------------------");
+        console.log(columns);
+        console.log("----------------------------------------------------------------");
+        start();
+    });
 });
 
 // FUNCTIONS
@@ -28,10 +38,6 @@ var start = function() {
         var query = "SELECT * FROM products";
         connection.query(query, function(err, results) {
             if (err) throw err;
-            var columns = columnify(results, {
-                columnSplitter: '|'
-            });
-            console.log(columns);
             inquirer.prompt({
 
                 type: "list",
@@ -134,7 +140,9 @@ function vti() {
                 addStock(parseInt(results[0].stock_quantity), parseInt(units), id);
             } else {
                 console.log("Insufficient quantity!");
+                console.log("----------------------------------------------------------------");
                 start();
+                console.log("----------------------------------------------------------------");
             }
         });
     }); // then function completed
@@ -187,10 +195,21 @@ function anp() {
             product_name: name,
             department_name: dname,
             price: price,
-            stock_quantity: quantity
+            stock_quantity: quantity,
+            product_sales: 0
         }, function(err, results) {
             if (err) throw err;
+        var query = "SELECT * FROM products";
+        connection.query(query, function(err, results) {
+            if (err) throw err;
+            var columns = columnify(results, {
+                columnSplitter: '|'
+            });
+            console.log("----------------------------------------------------------------");
+            console.log(columns);
+            console.log("----------------------------------------------------------------");
             start();
+        });
         });
 
     });
@@ -205,7 +224,18 @@ function addStock(x, y, z) {
     }, {
         item_id: z
     }], function(err, results) {
-        start();
+        console.log("----------------------------------------------------------------");
+        var query = "SELECT * FROM products";
+        connection.query(query, function(err, results) {
+            if (err) throw err;
+            var columns = columnify(results, {
+                columnSplitter: '|'
+            });
+            console.log("----------------------------------------------------------------");
+            console.log(columns);
+            console.log("----------------------------------------------------------------");
+            start();
+        });
     });
 
 

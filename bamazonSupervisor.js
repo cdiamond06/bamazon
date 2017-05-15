@@ -17,44 +17,47 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    start();
-});
-
-
-// FUNCTION
-// -----------------------------------------------------------------------------------------
-function start() {
     var query = "SELECT * FROM departments";
     connection.query(query, function(err, results) {
         if (err) throw err;
         var columns = columnify(results, {
             columnSplitter: '|'
         });
+        console.log("---------------------------------------------------------------------------------");
         console.log(columns);
-        inquirer.prompt({
+        console.log("---------------------------------------------------------------------------------");
+        start();
+    });
 
-            type: "list",
-            message: "Choose which item you would like to execute?",
-            name: "choice",
-            choices: ["view-product-sales-by-department", "create-new-department"]
+});
 
-        }).then(function(user) {
-            call = user.choice;
 
-            switch (call) {
+// FUNCTION
+// -----------------------------------------------------------------------------------------
+function start() {
+    inquirer.prompt({
 
-                case "view-product-sales-by-department":
-                    vpsbd();
-                    break;
+        type: "list",
+        message: "Choose which item you would like to execute?",
+        name: "choice",
+        choices: ["view-product-sales-by-department", "create-new-department"]
 
-                case "create-new-department":
-                    cnd();
-                    break;
+    }).then(function(user) {
+        call = user.choice;
 
-                default:
-                    console.log("something went wrong")
-            };
-        });
+        switch (call) {
+
+            case "view-product-sales-by-department":
+                vpsbd();
+                break;
+
+            case "create-new-department":
+                cnd();
+                break;
+
+            default:
+                console.log("something went wrong")
+        };
     });
 }
 
@@ -65,8 +68,10 @@ function vpsbd() {
         var columns = columnify(results, {
             columnSplitter: '|'
         });
+        console.log("---------------------------------------------------------------------------------");
         console.log(columns);
-
+        console.log("---------------------------------------------------------------------------------");
+        start();
     });
 
 }
@@ -85,7 +90,7 @@ function cnd() {
             message: "Cost of Overhead?",
             name: "overhead",
             validate: function(value) {
-                if (isNaN(value) === false && value > 0 && value < 100000000) {
+                if (isNaN(value) === false && value >= 0 && value < 100000000) {
                     return true;
                 }
                 return false;
@@ -97,7 +102,7 @@ function cnd() {
             message: "Total Sales?",
             name: "sales",
             validate: function(value) {
-                if (isNaN(value) === false && value > 0 && value < 10000000) {
+                if (isNaN(value) === false && value >= 0 && value < 10000000) {
                     return true;
                 }
                 return false;
@@ -114,7 +119,17 @@ function cnd() {
             total_sales: sales
         }, function(err, results) {
             if (err) throw err;
-            start();
+            var query = "SELECT * FROM departments";
+            connection.query(query, function(err, results) {
+                if (err) throw err;
+                var columns = columnify(results, {
+                    columnSplitter: '|'
+                });
+                console.log("---------------------------------------------------------------------------------");
+                console.log(columns);
+                console.log("---------------------------------------------------------------------------------");
+                start();
+            });
         });
 
     });
