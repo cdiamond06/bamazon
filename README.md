@@ -2,6 +2,8 @@
 Date Created: 05/15/2017
 # GENERAL USAGE NOTES
 -----------------------------------------------------------------
+- Users will be able to update stocks and number of sales for products, enter data for new products and view product sales of departments. 
+
 Included: All bamazon js files: bamazonCustomer, bamazonManager, and bamazonSupervisor in a js file format.
 
 INSTALLING NPM MODULES
