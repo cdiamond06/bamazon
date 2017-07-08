@@ -1,6 +1,6 @@
 # bamazon
 Date Created: 05/15/2017
-GENERAL USAGE NOTES
+# GENERAL USAGE NOTES
 -----------------------------------------------------------------
 Included: All bamazon js files: bamazonCustomer, bamazonManager, and bamazonSupervisor in a js file format.
 
